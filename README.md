@@ -1,9 +1,9 @@
 iosTool
 =======
 
-# 开发工具
+## 开发工具
 
-## ALToast
+### ALToast
 
 该控件主要用于提示，采用非arc模式编写
 
@@ -11,14 +11,14 @@ iosTool
  
 
 
-部分截图：
+## 部分截图：
 
 ALToast
 
 ![image](https://github.com/qq644531343/iosTool/blob/master/screenshot/ALToast.png)
 
 
-### log:
+## log:
 
 20140916 增加ALToast
 
