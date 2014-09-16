@@ -14,7 +14,8 @@ ALToast
 部分截图：
 
 ALToast
-![image](https://github.com/qq644531343/iosTool/blob/master/screenshot/ALToast.png)
+
+![image width=320 height=568](https://github.com/qq644531343/iosTool/blob/master/screenshot/ALToast.png)
 
 
 log:
