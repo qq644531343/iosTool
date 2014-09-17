@@ -21,8 +21,8 @@ iosTool
 工具，提供对view的frame属性的设置和获取
 包含:
 
-* left top right bottom width height centerX centerY origin size
-* removeAllSubviews viewController
+     * left top right bottom width height centerX centerY origin size
+     * removeAllSubviews viewController
 
 
 
