@@ -17,6 +17,16 @@ iosTool
   
 
 
+### UIView+Frame
+工具，提供对view的frame属性的设置和获取
+包含:
+
+* left top right bottom width height centerX centerY origin size
+* removeAllSubviews viewController
+
+
+
+
 ## 部分截图：
 
 ALToast
@@ -27,4 +37,5 @@ ALToast
 ## log:
 
 20140916 增加ALToast
+20140917 增加UIView+Frame
 
