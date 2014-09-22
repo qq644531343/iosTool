@@ -24,6 +24,12 @@ iosTool
      * left top right bottom width height centerX centerY origin size
      * removeAllSubviews viewController
 
+### VDShareFileHandle
+
+工具，提供对文件的基本操作。
+
+包括获取系统目录路径、以只读/只写形式获取path的fileHandel、删除文件、是否存在文件、拷贝文件、获取文件大小、删除特定后缀的文件、获取目录中所有文件名、获取文件的修改日期、文件重命名、写入/读取文件Data、创建文件/目录、添加/覆盖数据等
+
 
 
 
@@ -38,4 +44,5 @@ ALToast
 
 20140916 增加ALToast
 20140917 增加UIView+Frame
+20140922 增加VDFileHandel
 
