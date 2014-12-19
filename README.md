@@ -43,6 +43,10 @@ ALToast
 ## log:
 
 20140916 增加ALToast
+
 20140917 增加UIView+Frame
+
 20140922 增加VDFileHandel
+
+20141219 增加UITableView搜索、索引相关
 
