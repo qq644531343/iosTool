@@ -52,15 +52,6 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
     return self;
 }
 
-// ==== not need
-//- (void)setFrame:(CGRect)frame
-//{
-//    [super setFrame:frame];
-//    _toPoint = _startPoint = CGPointMake(frame.size.width / 2,
-//                                         frame.size.height / 2);
-//    [self setNeedsDisplay];
-//}
-
 - (void)setLineWith:(CGFloat)lineWith
 {
     _lineWith = lineWith;
@@ -137,6 +128,10 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
 
 - (void)drawRect:(CGRect)rect
 {
+//    [self checkStatus];
+}
+
+- (void)checkStatus {
     switch (_state) {
         case SRSlimeStateNormal:
         {
@@ -162,12 +157,9 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
                 if (percent <= 0) {
                     _state = SRSlimeStateShortening;
                     
-                    // pragma mark to suppress the warning
-                    // "performSelector may cause a leak because its selector is unknown"
-                    // applies only to the enclosed line
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                     NSLog(@"已达下拉需求");
+                    NSLog(@"已达下拉需求");
                     [_target performSelector:_action
                                   withObject:self];
 #pragma clang diagnostic pop
@@ -184,7 +176,7 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
         case SRSlimeStateShortening:
         {
             _toPoint = CGPointMake((_toPoint.x - _startPoint.x)*0.8 + _startPoint.x,
-                                       (_toPoint.y - _startPoint.y)*0.8 + _startPoint.y);
+                                   (_toPoint.y - _startPoint.y)*0.8 + _startPoint.y);
             float p = distansBetween(_startPoint, _toPoint) / [self _getViscous];
             float percent =1 -p;
             float r = _radius * p;
@@ -236,20 +228,6 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
 - (void)scaling
 {
     if (_state == SRSlimeStateShortening) {
-//        self.toPoint = CGPointMake((_toPoint.x - _startPoint.x)*0.9 + _startPoint.x,
-//                                   (_toPoint.y - _startPoint.y)*0.9 + _startPoint.y);
-//        float p = distansBetween(_startPoint, _toPoint) / _viscous;
-//        self.layer.transform = CATransform3DMakeScale(p, p, 1);
-//        
-//        if (p > 0.01) {
-//            [self performSelector:@selector(scaling)
-//                       withObject:nil
-//                       afterDelay:kAnimationInterval
-//                          inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-//        }else {
-//            self.hidden = YES;
-//            _state = SRSlimeStateMiss;
-//        }
         [self setNeedsDisplay];
         [self performSelector:@selector(scaling)
                        withObject:nil

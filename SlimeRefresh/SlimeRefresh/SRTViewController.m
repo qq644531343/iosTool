@@ -63,6 +63,7 @@
     _slimeView.slime.lineWith = 0;
     _slimeView.slime.shadowBlur = 0;
     _slimeView.slime.shadowColor = _slimeView.slime.bodyColor;
+    _slimeView.supportMenu = YES;
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
     headerView.backgroundColor = [UIColor redColor];
@@ -85,15 +86,14 @@
         return;
     }
     
-    self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height);
-    if (scrollView.contentOffset.y < -30) {
-//        NSLog(@"%f",scrollView.contentOffset.y);
-        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-30)/35);
-    }else {
-        [UIView animateWithDuration:0.1 animations:^{
-            self.menuView.alpha = 0;
-        }];
-    }
+    //self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height);
+//    if (scrollView.contentOffset.y < -30) {
+//        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-30)/35);
+//    }else {
+//        [UIView animateWithDuration:0.1 animations:^{
+//            self.menuView.alpha = 0;
+//        }];
+//    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate

@@ -51,7 +51,7 @@
         _slime = [[SRSlimeView alloc] initWithFrame:
                   CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height)];
         _slime.startPoint = CGPointMake(frame.size.width / 2, height / 2);
-        
+        _slime.hidden = YES;
         [self addSubview:_slime];
         
         _refleshView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sr_refresh"]];
@@ -63,7 +63,8 @@
                                   initWithActivityIndicatorStyle:
                                   UIActivityIndicatorViewStyleGray];
         [_activityIndicatorView stopAnimating];
-        _activityIndicatorView.center = _slime.startPoint;
+        _activityIndicatorView.hidesWhenStopped = NO;
+        _activityIndicatorView.center = CGPointMake(frame.size.width/2.0, height/2.0+10);
         [self addSubview:_activityIndicatorView];
         
         [_slime setPullApartTarget:self
@@ -87,7 +88,7 @@
         _slime.startPoint = CGPointMake(frame.size.width / 2, _dragingHeight / 2);
     }
     _refleshView.center = _slime.startPoint;
-    _activityIndicatorView.center = _slime.startPoint;
+   _activityIndicatorView.center = CGPointMake(frame.size.width/2.0,_dragingHeight/2 + 10);
 }
 
 - (void)setSlimeMissWhenGoingBack:(BOOL)slimeMissWhenGoingBack
@@ -109,29 +110,29 @@
     _loading = loading;
     if (_loading) {
         [_activityIndicatorView startAnimating];
-        CAKeyframeAnimation *aniamtion = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-        
-        aniamtion.values = [NSArray arrayWithObjects:
-                            [NSValue valueWithCATransform3D:
-                             CATransform3DRotate(CATransform3DMakeScale(0.01, 0.01, 0.1),
-                             -M_PI, 0, 0, 1)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.6, 1.6, 1)],
-                            [NSValue valueWithCATransform3D:CATransform3DIdentity],nil];
-        aniamtion.keyTimes = [NSArray arrayWithObjects:
-                              [NSNumber numberWithFloat:0],
-                              [NSNumber numberWithFloat:0.6],
-                              [NSNumber numberWithFloat:1], nil];
-        aniamtion.timingFunctions = [NSArray arrayWithObjects:
-                                     [CAMediaTimingFunction functionWithName:
-                                      kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:
-                                      kCAMediaTimingFunctionEaseInEaseOut],
-                                      nil];
-        aniamtion.duration = 0.7;
-        _activityIndicatorView.layer.transform = CATransform3DIdentity;
-        [_activityIndicatorView.layer addAnimation:aniamtion
-                                            forKey:@""];
-        //_slime.hidden = YES;
+//        CAKeyframeAnimation *aniamtion = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+//        
+//        aniamtion.values = [NSArray arrayWithObjects:
+//                            [NSValue valueWithCATransform3D:
+//                             CATransform3DRotate(CATransform3DMakeScale(0.01, 0.01, 0.1),
+//                             -M_PI, 0, 0, 1)],
+//                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.6, 1.6, 1)],
+//                            [NSValue valueWithCATransform3D:CATransform3DIdentity],nil];
+//        aniamtion.keyTimes = [NSArray arrayWithObjects:
+//                              [NSNumber numberWithFloat:0],
+//                              [NSNumber numberWithFloat:0.6],
+//                              [NSNumber numberWithFloat:1], nil];
+//        aniamtion.timingFunctions = [NSArray arrayWithObjects:
+//                                     [CAMediaTimingFunction functionWithName:
+//                                      kCAMediaTimingFunctionEaseInEaseOut],
+//                                     [CAMediaTimingFunction functionWithName:
+//                                      kCAMediaTimingFunctionEaseInEaseOut],
+//                                      nil];
+//        aniamtion.duration = 0.7;
+//        _activityIndicatorView.layer.transform = CATransform3DIdentity;
+//        [_activityIndicatorView.layer addAnimation:aniamtion
+//                                            forKey:@""];
+        _slime.hidden = YES;
         _refleshView.hidden = YES;
         if (!_unmissSlime){
             _slime.state = SRSlimeStateMiss;
@@ -141,7 +142,7 @@
     }else {
         
         [_activityIndicatorView stopAnimating];
-        _slime.hidden = NO;
+        _slime.hidden = YES;//
         _refleshView.hidden = NO;
         _refleshView.layer.transform = CATransform3DIdentity;
         [UIView transitionWithView:_scrollView
@@ -231,8 +232,16 @@
         rect.size.height = -p.y;
         rect.size.height = ceilf(rect.size.height);
         self.frame = rect;
-        if (!self.loading) {
-            [_slime setNeedsDisplay];
+//        if (!self.loading) {
+//            [_slime setNeedsDisplay];
+//        }
+        if (!self.loading && self.supportMenu) {
+            if (p.y < -100) {
+                NSLog(@"拉出菜单，终止刷新");
+                _loading = YES;
+                _broken = YES;
+                self.showMenu = YES;
+            }
         }
         if (!_broken) {
             float l = -(p.y + _dragingHeight + _upInset);
@@ -257,15 +266,18 @@
         rect.origin.y = -_dragingHeight;
         rect.size.height = _dragingHeight;
         self.frame = rect;
-        [_slime setNeedsDisplay];
+//        [_slime setNeedsDisplay];
         _slime.toPoint = _slime.startPoint;
         if (_slimeMissWhenGoingBack) self.alpha = -(p.y + _upInset) / _dragingHeight;
-//        NSLog(@"下拉中");
     }
 }
 
 - (void)scrollViewDidEndDraging
 {
+    if (!self.loading) {
+        [_slime checkStatus];
+    }
+    
     if (_broken) {
         if (self.loading) {
             [UIView transitionWithView:_scrollView.superview
@@ -281,7 +293,12 @@
                                                    options:0
                                                 animations:^{
                                                     UIEdgeInsets inset = _scrollView.contentInset;
-                                                    inset.top = _upInset + _dragingHeight + __TOP_INSET;
+                                                    if (!self.showMenu) {
+                                                        inset.top = _upInset + _dragingHeight + __TOP_INSET;
+                                                    }else{
+                                                        inset.top = inset.top = _upInset + _dragingHeight + __TOP_MENU_INSET;
+                                                    }
+                                                    
                                                     _scrollView.contentInset = inset;
                                                 } completion:^(BOOL finished) {
                                                     self.broken = NO;
@@ -302,7 +319,6 @@
 - (void)endRefresh
 {
     if (self.loading) {
-        //_notSetFrame = YES;
         NSLog(@"刷新结束");
         [self performSelector:@selector(restore)
                    withObject:nil
@@ -320,22 +336,13 @@
                        options:UIViewAnimationCurveEaseIn
                     animations:^
      {
-         _activityIndicatorView.layer.transform = CATransform3DRotate(
-                                                                      CATransform3DMakeScale(0.01f, 0.01f, 0.1f), -M_PI, 0, 0, 1);
+//         _activityIndicatorView.layer.transform = CATransform3DRotate(CATransform3DMakeScale(0.01f, 0.01f, 0.1f), -M_PI, 0, 0, 1);
      } completion:^(BOOL finished)
      {
          self.loading = NO;
+         self.showMenu = NO;
+         [_activityIndicatorView stopAnimating];
          _slime.state = SRSlimeStateNormal;
- //some bug here.
- //             CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:
- //                                            @"transform"];
- //             animation.fromValue = [NSValue valueWithCATransform3D:
- //                                    CATransform3DMakeScale(0.1, 0.1, 1)];
- //             animation.toValue = [NSValue valueWithCATransform3D:
- //                                  CATransform3DIdentity];
- //             animation.duration = 0.2f;
- //             [_slime.layer addAnimation:animation
- //                                 forKey:@""];
      }];
 }
 

@@ -43,4 +43,6 @@ typedef enum {
 
 - (void)setPullApartTarget:(id)target action:(SEL)action;
 
+- (void)checkStatus;
+
 @end

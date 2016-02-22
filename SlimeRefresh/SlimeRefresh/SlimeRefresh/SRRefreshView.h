@@ -11,7 +11,8 @@
 #import <UIKit/UIKit.h>
 #import "SRSlimeView.h"
 
-#define __TOP_INSET 40
+#define __TOP_INSET 30
+#define __TOP_MENU_INSET    100
 
 @class SRRefreshView;
 
@@ -26,6 +27,8 @@ typedef void (^SRRefreshBlock)(SRRefreshView* sender);
 
 //set the state loading or not.
 @property (nonatomic, assign)   BOOL    loading;
+@property (nonatomic, assign)   BOOL    supportMenu;
+@property (nonatomic, assign)   BOOL    showMenu;
 - (void)setLoadingWithexpansion;
 
 //set the slime's style by this property.
