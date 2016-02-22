@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SRSlimeView.h"
+#import "SRMenuView.h"
 
 #define __TOP_INSET 30
 #define __TOP_MENU_INSET    100
@@ -39,6 +40,7 @@ typedef void (^SRRefreshBlock)(SRRefreshView* sender);
 @property (nonatomic, copy)     SRRefreshBlock      block;
 @property (nonatomic, assign)   id<SRRefreshDelegate>   delegate;
 @property (nonatomic, readonly) UIActivityIndicatorView *activityIndicationView;
+@property (nonatomic, strong)   SRMenuView  *menuView;
 
 //default is false, if true when slime go back it will have a alpha effect 
 //to go to miss.

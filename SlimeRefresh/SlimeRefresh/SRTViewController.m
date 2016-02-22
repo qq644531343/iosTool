@@ -42,7 +42,8 @@
 
 - (void)addMenuView {
     
-    self.menuView = [MenuBaseView getMenuViewWithFrame:_tableView.frame delegate:self];
+    CGRect frame = CGRectMake(0, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height);
+    self.menuView = [MenuBaseView getMenuViewWithFrame:frame  delegate:self];
     self.menuView.alpha = 0;
     [self.view addSubview:self.menuView];
 }
@@ -86,14 +87,22 @@
         return;
     }
     
-    //self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height);
-//    if (scrollView.contentOffset.y < -30) {
-//        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-30)/35);
-//    }else {
-//        [UIView animateWithDuration:0.1 animations:^{
-//            self.menuView.alpha = 0;
-//        }];
-//    }
+    self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height);
+    
+    if (scrollView.contentOffset.y < - 5) {
+        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-10)/10);
+    }else {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.menuView.alpha = 0;
+        }];
+    }
+    
+    if (scrollView.contentOffset.y <= -132) {
+        self.menuView.cancelBtn.hidden = NO;
+        self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + 132, self.menuView.frame.size.width, self.menuView.frame.size.height);
+    }else {
+        self.menuView.cancelBtn.hidden = YES;
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate

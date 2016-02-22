@@ -8,7 +8,9 @@
 
 #import "SRRefreshView.h"
 #import "SRSlimeView.h"
+#import "SRMenuView.h"
 #import "SRDefine.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface SRRefreshView()
@@ -66,6 +68,11 @@
         _activityIndicatorView.hidesWhenStopped = NO;
         _activityIndicatorView.center = CGPointMake(frame.size.width/2.0, height/2.0+10);
         [self addSubview:_activityIndicatorView];
+        
+        self.menuView = [[SRMenuView alloc] initWithFrame:CGRectMake(0, 132-64, frame.size.width, 64)];
+        [self.menuView configSubViews];
+        self.menuView.alpha = 0;
+        [self addSubview:self.menuView];
         
         [_slime setPullApartTarget:self
                             action:@selector(pullApart:)];
@@ -236,12 +243,16 @@
 //            [_slime setNeedsDisplay];
 //        }
         if (!self.loading && self.supportMenu) {
+            if (p.y < -80) {
+                self.menuView.alpha = (fabs(p.y)-80)/50;
+            }
             if (p.y < -100) {
                 NSLog(@"拉出菜单，终止刷新");
                 _loading = YES;
                 _broken = YES;
                 self.showMenu = YES;
             }
+            NSLog(@"%f", p.y);
         }
         if (!_broken) {
             float l = -(p.y + _dragingHeight + _upInset);
@@ -269,6 +280,7 @@
 //        [_slime setNeedsDisplay];
         _slime.toPoint = _slime.startPoint;
         if (_slimeMissWhenGoingBack) self.alpha = -(p.y + _upInset) / _dragingHeight;
+        self.menuView.alpha = 0;
     }
 }
 
@@ -295,7 +307,9 @@
                                                     UIEdgeInsets inset = _scrollView.contentInset;
                                                     if (!self.showMenu) {
                                                         inset.top = _upInset + _dragingHeight + __TOP_INSET;
+                                                        self.menuView.alpha = 0;
                                                     }else{
+                                                        self.menuView.alpha = 1;
                                                         inset.top = inset.top = _upInset + _dragingHeight + __TOP_MENU_INSET;
                                                     }
                                                     

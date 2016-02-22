@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		090E963E1C770C1D000F9B5E /* MenuBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090E963D1C770C1D000F9B5E /* MenuBaseView.m */; };
+		09ABFFC81C7B111D00AAB374 /* SRMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ABFFC71C7B111D00AAB374 /* SRMenuView.m */; };
 		184CE2E3158B834F003C2C83 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CE2E1158B834F003C2C83 /* sr_refresh.png */; };
 		184CE2EA158B86C6003C2C83 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CE2E9158B86C6003C2C83 /* SRRefreshView.m */; };
 		184CE2EC158B874A003C2C83 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CE2EB158B874A003C2C83 /* SRSlimeView.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks"; }; };
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		090E963C1C770C1C000F9B5E /* MenuBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBaseView.h; sourceTree = "<group>"; };
 		090E963D1C770C1D000F9B5E /* MenuBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBaseView.m; sourceTree = "<group>"; };
+		09ABFFC61C7B111D00AAB374 /* SRMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRMenuView.h; sourceTree = "<group>"; };
+		09ABFFC71C7B111D00AAB374 /* SRMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRMenuView.m; sourceTree = "<group>"; };
 		184CE2E1158B834F003C2C83 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sr_refresh.png; sourceTree = "<group>"; };
 		184CE2E8158B86C6003C2C83 /* SRRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRefreshView.h; sourceTree = "<group>"; };
 		184CE2E9158B86C6003C2C83 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				184CE2E8158B86C6003C2C83 /* SRRefreshView.h */,
 				184CE2E9158B86C6003C2C83 /* SRRefreshView.m */,
 				184CE2ED158B9344003C2C83 /* SRDefine.h */,
+				09ABFFC61C7B111D00AAB374 /* SRMenuView.h */,
+				09ABFFC71C7B111D00AAB374 /* SRMenuView.m */,
 			);
 			path = SlimeRefresh;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				5F919283158B0D0600FCC748 /* AppDelegate.m in Sources */,
 				5F919294158B15AD00FCC748 /* SRTViewController.m in Sources */,
 				184CE2EA158B86C6003C2C83 /* SRRefreshView.m in Sources */,
+				09ABFFC81C7B111D00AAB374 /* SRMenuView.m in Sources */,
 				090E963E1C770C1D000F9B5E /* MenuBaseView.m in Sources */,
 				184CE2EC158B874A003C2C83 /* SRSlimeView.m in Sources */,
 			);

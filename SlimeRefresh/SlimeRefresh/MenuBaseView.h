@@ -20,6 +20,6 @@
 
 + (MenuBaseView *)getMenuViewWithFrame:(CGRect)frame delegate:(id<MenuBaseViewDelegate>)delegate;
 
-- (void)resetFrame;
+@property (nonatomic, strong) UIButton *cancelBtn;
 
 @end
