@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "88404711345C98BFCBE728C0A5F337BB2CB989B8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "88404711345C98BFCBE728C0A5F337BB2CB989B8" : 0,
+    "A8FD9E7D61C163410EF13F5FE44019E60755B4C7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F57B275C-0FF8-4EBC-9461-EB02EA192601",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "88404711345C98BFCBE728C0A5F337BB2CB989B8" : "SlimeRefresh\/",
+    "A8FD9E7D61C163410EF13F5FE44019E60755B4C7" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SlimeRefresh",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SlimeRefresh.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dbsGen\/SlimeRefresh.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "88404711345C98BFCBE728C0A5F337BB2CB989B8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/qq644531343\/iosTool.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A8FD9E7D61C163410EF13F5FE44019E60755B4C7"
+    }
+  ]
+}
