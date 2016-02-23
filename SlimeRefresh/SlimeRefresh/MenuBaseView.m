@@ -13,7 +13,11 @@
     CGRect originFrame;
 }
 
-@property (nonatomic, strong) SHSBlurView *baseView;
+@property (nonatomic, strong) FXBlurView *blurView;
+
+@property (nonatomic, strong) UIView *baseView;
+
+@property (nonatomic, weak) UIView *parentView;
 
 @property (nonatomic, weak) id<MenuBaseViewDelegate> delegate;
 
@@ -21,34 +25,46 @@
 
 @implementation MenuBaseView
 
-+ (MenuBaseView *)getMenuViewWithFrame:(CGRect)frame delegate:(id<MenuBaseViewDelegate>)delegate
++ (MenuBaseView *)getMenuViewWithFrame:(CGRect)frame parentView:(UIView *)view delegate:(id<MenuBaseViewDelegate>)delegate
 {
-    MenuBaseView *view = [[MenuBaseView alloc] initWithFrame:frame];
-//    view.blurTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
-//    view.alpha = 0.7;
-    view.backgroundColor = [UIColor clearColor];
-    view.delegate = delegate;
-    [view configSubViews];
-    return view;
+    FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:frame];
+    blurView.blurRadius = 15;
+    blurView.hidden = YES;
+    blurView.tintColor = [UIColor clearColor];
+    blurView.userInteractionEnabled = NO;
+    blurView.blurEnabled = NO;
+    [view addSubview:blurView];
+    
+    MenuBaseView *menu = [[MenuBaseView alloc] initWithFrame:frame];
+    menu.parentView = view;
+    menu.blurView = blurView;
+    menu.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    menu.delegate = delegate;
+    
+    [menu configSubViews];
+    
+    [view addSubview:menu];
+    
+    return menu;
 }
 
 - (void)configSubViews {
     
     originFrame = self.frame;
     
-    self.baseView = [[SHSBlurView alloc] initWithFrame:self.bounds];
+    self.baseView = [[UIView alloc] initWithFrame:self.bounds];
     self.baseView.clipsToBounds = YES;
-    self.baseView.blurTintColor = [UIColor blackColor];
-    self.baseView.alpha = 0.7;
     [self addSubview:self.baseView];
     
     self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
     self.cancelBtn.frame = CGRectMake(0, 0, 60, 40);
     self.cancelBtn.backgroundColor = [UIColor redColor];
-    [self.baseView addSubview:self.cancelBtn];
+    [self addSubview:self.cancelBtn];
     self.cancelBtn.center = CGPointMake(self.baseView.center.x, self.baseView.center.y);
     [self.cancelBtn addTarget:self action:@selector(cancelClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
 
 - (void)cancelClick:(UIButton *)btn {
@@ -56,6 +72,25 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(menuBaseView:cancelBtnClicked:)]) {
         [self.delegate menuBaseView:self cancelBtnClicked:btn];
     }
+}
+
+- (void)changeAlpha:(float)alpha
+{
+    self.alpha = alpha;
+    if (alpha == 0) {
+        self.blurView.blurEnabled = NO;
+        self.blurView.hidden = YES;
+    }else {
+        self.blurView.blurEnabled = YES;
+        self.blurView.hidden = NO;
+    }
+    
+}
+
+- (void)changeFrame:(CGRect)frame
+{
+    self.frame = frame;
+    self.blurView.frame = frame;
 }
 
 @end

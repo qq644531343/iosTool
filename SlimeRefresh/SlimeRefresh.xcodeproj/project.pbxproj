@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		090E963E1C770C1D000F9B5E /* MenuBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090E963D1C770C1D000F9B5E /* MenuBaseView.m */; };
+		099466CA1C7C311B0026E44B /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 099466C91C7C311B0026E44B /* FXBlurView.m */; };
+		099466CC1C7C327E0026E44B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099466CB1C7C327E0026E44B /* Accelerate.framework */; };
 		09ABFFC81C7B111D00AAB374 /* SRMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ABFFC71C7B111D00AAB374 /* SRMenuView.m */; };
-		09F3407B1C7BFC0E00FBC0FD /* SHSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F3407A1C7BFC0E00FBC0FD /* SHSBlurView.m */; };
 		184CE2E3158B834F003C2C83 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CE2E1158B834F003C2C83 /* sr_refresh.png */; };
 		184CE2EA158B86C6003C2C83 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CE2E9158B86C6003C2C83 /* SRRefreshView.m */; };
 		184CE2EC158B874A003C2C83 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CE2EB158B874A003C2C83 /* SRSlimeView.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks"; }; };
@@ -28,10 +29,11 @@
 /* Begin PBXFileReference section */
 		090E963C1C770C1C000F9B5E /* MenuBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBaseView.h; sourceTree = "<group>"; };
 		090E963D1C770C1D000F9B5E /* MenuBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBaseView.m; sourceTree = "<group>"; };
+		099466C81C7C311B0026E44B /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		099466C91C7C311B0026E44B /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		099466CB1C7C327E0026E44B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		09ABFFC61C7B111D00AAB374 /* SRMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRMenuView.h; sourceTree = "<group>"; };
 		09ABFFC71C7B111D00AAB374 /* SRMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRMenuView.m; sourceTree = "<group>"; };
-		09F340791C7BFC0E00FBC0FD /* SHSBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSBlurView.h; sourceTree = "<group>"; };
-		09F3407A1C7BFC0E00FBC0FD /* SHSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSBlurView.m; sourceTree = "<group>"; };
 		184CE2E1158B834F003C2C83 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sr_refresh.png; sourceTree = "<group>"; };
 		184CE2E8158B86C6003C2C83 /* SRRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRefreshView.h; sourceTree = "<group>"; };
 		184CE2E9158B86C6003C2C83 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099466CC1C7C327E0026E44B /* Accelerate.framework in Frameworks */,
 				18C0D463158C92F100B13C13 /* QuartzCore.framework in Frameworks */,
 				5F919273158B0D0600FCC748 /* UIKit.framework in Frameworks */,
 				5F919275158B0D0600FCC748 /* Foundation.framework in Frameworks */,
@@ -70,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		099466C71C7C31070026E44B /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				099466C81C7C311B0026E44B /* FXBlurView.h */,
+				099466C91C7C311B0026E44B /* FXBlurView.m */,
+			);
+			path = FXBlurView;
+			sourceTree = "<group>";
+		};
 		5F919263158B0D0600FCC748 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +103,7 @@
 		5F919271158B0D0600FCC748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				099466CB1C7C327E0026E44B /* Accelerate.framework */,
 				18C0D462158C92F100B13C13 /* QuartzCore.framework */,
 				5F919272158B0D0600FCC748 /* UIKit.framework */,
 				5F919274158B0D0600FCC748 /* Foundation.framework */,
@@ -102,14 +115,13 @@
 		5F919278158B0D0600FCC748 /* SlimeRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				099466C71C7C31070026E44B /* FXBlurView */,
 				5F91928D158B0D2D00FCC748 /* SlimeRefresh */,
 				5F919281158B0D0600FCC748 /* AppDelegate.h */,
 				5F919282158B0D0600FCC748 /* AppDelegate.m */,
 				5F919279158B0D0600FCC748 /* Supporting Files */,
 				5F919292158B15AD00FCC748 /* SRTViewController.h */,
 				5F919293158B15AD00FCC748 /* SRTViewController.m */,
-				09F340791C7BFC0E00FBC0FD /* SHSBlurView.h */,
-				09F3407A1C7BFC0E00FBC0FD /* SHSBlurView.m */,
 				090E963C1C770C1C000F9B5E /* MenuBaseView.h */,
 				090E963D1C770C1D000F9B5E /* MenuBaseView.m */,
 			);
@@ -214,8 +226,8 @@
 				184CE2EA158B86C6003C2C83 /* SRRefreshView.m in Sources */,
 				09ABFFC81C7B111D00AAB374 /* SRMenuView.m in Sources */,
 				090E963E1C770C1D000F9B5E /* MenuBaseView.m in Sources */,
-				09F3407B1C7BFC0E00FBC0FD /* SHSBlurView.m in Sources */,
 				184CE2EC158B874A003C2C83 /* SRSlimeView.m in Sources */,
+				099466CA1C7C311B0026E44B /* FXBlurView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

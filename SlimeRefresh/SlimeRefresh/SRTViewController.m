@@ -8,9 +8,10 @@
 
 #import "SRTViewController.h"
 #import "SRRefreshView.h"
+#import "FXBlurView.h"
 
 @interface SRTViewController ()
-<UITableViewDelegate, SRRefreshDelegate, MenuBaseViewDelegate>
+<UITableViewDelegate, UITableViewDataSource, SRRefreshDelegate, MenuBaseViewDelegate>
 
 @property (nonatomic, strong) MenuBaseView *menuView;
 
@@ -43,9 +44,8 @@
 - (void)addMenuView {
     
     CGRect frame = CGRectMake(0, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height);
-    self.menuView = [MenuBaseView getMenuViewWithFrame:frame  delegate:self];
-    self.menuView.alpha = 0;
-    [self.view addSubview:self.menuView];
+    self.menuView = [MenuBaseView getMenuViewWithFrame:frame parentView:self.view delegate:self];
+//    self.menuView.alpha = 1;
 }
 
 - (void)addRefresh {
@@ -54,6 +54,7 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height)];
     bounds.size.height += 1;
     _tableView.delegate = self;
+    _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
     _slimeView = [[SRRefreshView alloc] init];
@@ -83,21 +84,23 @@
 {
     [_slimeView scrollViewDidScroll];
     
-    self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height);
+    [self.menuView changeFrame:CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height)];
     
     if (scrollView.contentOffset.y < - (_slimeView.upInset + 5)) {
-        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-(_slimeView.upInset + 10))/10);
+        float alpha = 1 * ((fabs(scrollView.contentOffset.y)-(_slimeView.upInset + 10))/10);
+        [self.menuView changeAlpha:alpha];
+       
         [self setNavigationBarAlpha:1-self.menuView.alpha];
     }else {
         [UIView animateWithDuration:0.3 animations:^{
-            self.menuView.alpha = 0;
+            [self.menuView changeAlpha:0];
             [self setNavigationBarAlpha:1];
         }];
     }
 
     if (scrollView.contentOffset.y <= - (132+_slimeView.upInset) && _slimeView.showMenu==YES) {
         self.menuView.cancelBtn.hidden = NO;
-        self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + (132+_slimeView.upInset), self.menuView.frame.size.width, self.menuView.frame.size.height);
+        [self.menuView changeFrame:CGRectMake(0, _tableView.frame.origin.y + (132+_slimeView.upInset), self.menuView.frame.size.width, self.menuView.frame.size.height)];
     }else {
         self.menuView.cancelBtn.hidden = YES;
     }
@@ -126,6 +129,20 @@
 -(void)menuBaseView:(id)menuView cancelBtnClicked:(UIButton *)btn
 {
     [_slimeView endRefresh];
+}
+
+#pragma mark - 
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 30;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    cell.textLabel.text = @"喝咯，沙发舒服防守打法";
+    return cell;
 }
 
 @end

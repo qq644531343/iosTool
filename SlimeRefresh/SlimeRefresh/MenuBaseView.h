@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SHSBlurView.h"
+#import "FXBlurView/FXBlurView.h"
 
 @class MenuBaseView;
 
@@ -19,8 +19,14 @@
 
 @interface MenuBaseView : UIView
 
-+ (MenuBaseView *)getMenuViewWithFrame:(CGRect)frame delegate:(id<MenuBaseViewDelegate>)delegate;
++ (MenuBaseView *)getMenuViewWithFrame:(CGRect)frame parentView:(UIView *)view delegate:(id<MenuBaseViewDelegate>)delegate;
+
+- (void)changeAlpha:(float)alpha;
+
+- (void)changeFrame:(CGRect)frame;
 
 @property (nonatomic, strong) UIButton *cancelBtn;
+
+
 
 @end
