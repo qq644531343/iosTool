@@ -19,8 +19,9 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    self.window.rootViewController = [SRTViewController new];
-    //[[UINavigationController alloc] initWithRootViewController:[SRTViewController new]];
+//    self.window.rootViewController = [SRTViewController new];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[SRTViewController new]];
+    
     
     return YES;
 }

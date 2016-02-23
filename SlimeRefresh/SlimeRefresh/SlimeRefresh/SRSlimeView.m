@@ -154,7 +154,7 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
                                             percent:percent];
                 [self setContext:context path:path];
                 CGContextDrawPath(context, kCGPathFillStroke);
-                if (percent <= 0) {
+                if (percent <= 0.5) {  //此处控制下拉刷新的幅度，重要！
                     _state = SRSlimeStateShortening;
                     
 #pragma clang diagnostic push

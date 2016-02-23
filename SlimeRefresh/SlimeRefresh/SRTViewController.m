@@ -51,7 +51,7 @@
 - (void)addRefresh {
     
     CGRect bounds = self.view.bounds;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, bounds.size.width, bounds.size.height)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height)];
     bounds.size.height += 1;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
@@ -73,7 +73,7 @@
     [_tableView addSubview:_slimeView];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
-    [_slimeView update:0];
+    [_slimeView update:64];
 
 }
 
@@ -83,23 +83,19 @@
 {
     [_slimeView scrollViewDidScroll];
     
-    if (scrollView.contentOffset.y == -44) {
-        return;
-    }
-    
     self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + fabs(scrollView.contentOffset.y), self.menuView.frame.size.width, self.menuView.frame.size.height);
     
-    if (scrollView.contentOffset.y < - 5) {
-        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-10)/10);
+    if (scrollView.contentOffset.y < - (_slimeView.upInset + 5)) {
+        self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-(_slimeView.upInset + 10))/10);
     }else {
         [UIView animateWithDuration:0.3 animations:^{
             self.menuView.alpha = 0;
         }];
     }
-    
-    if (scrollView.contentOffset.y <= -132 && _slimeView.showMenu==YES) {
+
+    if (scrollView.contentOffset.y <= - (132+_slimeView.upInset) && _slimeView.showMenu==YES) {
         self.menuView.cancelBtn.hidden = NO;
-        self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + 132, self.menuView.frame.size.width, self.menuView.frame.size.height);
+        self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + (132+_slimeView.upInset), self.menuView.frame.size.width, self.menuView.frame.size.height);
     }else {
         self.menuView.cancelBtn.hidden = YES;
     }
@@ -115,7 +111,7 @@
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
     [_slimeView performSelector:@selector(endRefresh)
-                     withObject:nil afterDelay:3
+                     withObject:nil afterDelay:1
                         inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
 }
 

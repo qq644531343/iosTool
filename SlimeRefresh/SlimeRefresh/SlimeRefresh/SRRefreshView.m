@@ -78,7 +78,7 @@
         [_slime setPullApartTarget:self
                             action:@selector(pullApart:)];
         _dragingHeight = height;
-        _upInset = 44;
+        _upInset = 0;
     }
     return self;
 }
@@ -235,6 +235,7 @@
 {
     CGPoint p = _scrollView.contentOffset;
     CGRect rect = self.frame;
+     NSLog(@"-- %f %d", p.y, self.loading);
     if (p.y <= - _dragingHeight - _upInset) {
         rect.origin.y = p.y + _upInset;
         rect.size.height = -p.y;
@@ -244,24 +245,22 @@
 //            [_slime setNeedsDisplay];
 //        }
         
-        NSLog(@"%f %d", p.y, self.loading);
         if (!self.loading && self.supportMenu) {
-            if (p.y < -110) {
+            if (p.y < - (_upInset + 110)) {
                 NSLog(@"拉出菜单，终止刷新");
                 _loading = YES;
                 _broken = YES;
                 self.showMenu = YES;
             }
         }
-        if (self.supportMenu && p.y < -70) {
-            self.menuView.alpha = (fabs(p.y)-70)/60;
-            self.menuView.height = fabs(p.y)-70 +2;
+        float margin = 70 + _upInset;
+        if (self.supportMenu && p.y < - margin) {
+            self.menuView.alpha = (fabs(p.y)- margin)/60;
+            self.menuView.height = fabs(p.y)- margin +2;
         }
-//        NSLog(@"%f", p.y);
         if (!_broken) {
             float l = -(p.y + _dragingHeight + _upInset);
             if (l <= _oldLength) {
-//                NSLog(@"L:%f old:%f", l, _oldLength);
                  NSLog(@"滚动回退");
                 l = MIN(distansBetween(_slime.startPoint, _slime.toPoint), l);
                 CGPoint ssp = _slime.startPoint;
