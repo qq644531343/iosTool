@@ -236,6 +236,13 @@
     CGPoint p = _scrollView.contentOffset;
     CGRect rect = self.frame;
      NSLog(@"-- %f %d", p.y, self.loading);
+    
+    float margin = 70 + _upInset;
+    if (self.supportMenu && p.y < - margin) {
+        self.menuView.alpha = (fabs(p.y)- margin)/60;
+        self.menuView.height = fabs(p.y)- margin +2;
+    }
+    
     if (p.y <= - _dragingHeight - _upInset) {
         rect.origin.y = p.y + _upInset;
         rect.size.height = -p.y;
@@ -252,11 +259,6 @@
                 _broken = YES;
                 self.showMenu = YES;
             }
-        }
-        float margin = 70 + _upInset;
-        if (self.supportMenu && p.y < - margin) {
-            self.menuView.alpha = (fabs(p.y)- margin)/60;
-            self.menuView.height = fabs(p.y)- margin +2;
         }
         if (!_broken) {
             float l = -(p.y + _dragingHeight + _upInset);

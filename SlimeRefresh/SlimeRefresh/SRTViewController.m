@@ -66,7 +66,7 @@
     _slimeView.slime.shadowColor = _slimeView.slime.bodyColor;
     _slimeView.supportMenu = YES;
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 0)];
     headerView.backgroundColor = [UIColor redColor];
     _tableView.tableHeaderView = headerView;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;

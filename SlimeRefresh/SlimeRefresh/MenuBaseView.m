@@ -41,7 +41,6 @@
     menu.delegate = delegate;
     
     [menu configSubViews];
-    
     [view addSubview:menu];
     
     return menu;
@@ -88,6 +87,7 @@
 {
     self.frame = frame;
     self.blurView.frame = frame;
+    self.cancelBtn.center = CGPointMake(self.baseView.center.x, self.baseView.center.y);
 }
 
 @end

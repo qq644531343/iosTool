@@ -18,7 +18,7 @@
 -(void)addTestText {
     UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
     label.text = @"这里可以摆放一些控件";
-    label.backgroundColor = [UIColor greenColor];
+    label.backgroundColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label];
     
