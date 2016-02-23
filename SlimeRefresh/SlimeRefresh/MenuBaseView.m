@@ -29,10 +29,9 @@
 {
     FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:frame];
     blurView.blurRadius = 15;
-    blurView.hidden = YES;
     blurView.tintColor = [UIColor clearColor];
     blurView.userInteractionEnabled = NO;
-    blurView.blurEnabled = NO;
+    blurView.hidden = YES;
     [view addSubview:blurView];
     
     MenuBaseView *menu = [[MenuBaseView alloc] initWithFrame:frame];
@@ -78,10 +77,8 @@
 {
     self.alpha = alpha;
     if (alpha == 0) {
-        self.blurView.blurEnabled = NO;
         self.blurView.hidden = YES;
     }else {
-        self.blurView.blurEnabled = YES;
         self.blurView.hidden = NO;
     }
     

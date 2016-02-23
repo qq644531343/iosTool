@@ -45,7 +45,6 @@
     
     CGRect frame = CGRectMake(0, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height);
     self.menuView = [MenuBaseView getMenuViewWithFrame:frame parentView:self.view delegate:self];
-//    self.menuView.alpha = 1;
 }
 
 - (void)addRefresh {
