@@ -12,4 +12,6 @@
 
 - (void)configSubViews;
 
+@property (nonatomic, readwrite) float height;
+
 @end

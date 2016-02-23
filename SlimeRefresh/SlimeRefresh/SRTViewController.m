@@ -97,7 +97,7 @@
         }];
     }
     
-    if (scrollView.contentOffset.y <= -132) {
+    if (scrollView.contentOffset.y <= -132 && _slimeView.showMenu==YES) {
         self.menuView.cancelBtn.hidden = NO;
         self.menuView.frame = CGRectMake(0, _tableView.frame.origin.y + 132, self.menuView.frame.size.width, self.menuView.frame.size.height);
     }else {

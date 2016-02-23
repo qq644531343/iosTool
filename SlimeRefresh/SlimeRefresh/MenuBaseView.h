@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SHSBlurView.h"
 
 @class MenuBaseView;
 

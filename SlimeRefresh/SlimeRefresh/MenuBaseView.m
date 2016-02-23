@@ -13,7 +13,7 @@
     CGRect originFrame;
 }
 
-@property (nonatomic, strong) UIView *baseView;
+@property (nonatomic, strong) SHSBlurView *baseView;
 
 @property (nonatomic, weak) id<MenuBaseViewDelegate> delegate;
 
@@ -24,7 +24,9 @@
 + (MenuBaseView *)getMenuViewWithFrame:(CGRect)frame delegate:(id<MenuBaseViewDelegate>)delegate
 {
     MenuBaseView *view = [[MenuBaseView alloc] initWithFrame:frame];
-    view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.25];
+//    view.blurTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.1];
+//    view.alpha = 0.7;
+    view.backgroundColor = [UIColor clearColor];
     view.delegate = delegate;
     [view configSubViews];
     return view;
@@ -34,8 +36,10 @@
     
     originFrame = self.frame;
     
-    self.baseView = [[UIView alloc] initWithFrame:self.bounds];
+    self.baseView = [[SHSBlurView alloc] initWithFrame:self.bounds];
     self.baseView.clipsToBounds = YES;
+    self.baseView.blurTintColor = [UIColor blackColor];
+    self.baseView.alpha = 0.7;
     [self addSubview:self.baseView];
     
     self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
