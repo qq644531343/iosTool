@@ -87,9 +87,11 @@
     
     if (scrollView.contentOffset.y < - (_slimeView.upInset + 5)) {
         self.menuView.alpha = 1 * ((fabs(scrollView.contentOffset.y)-(_slimeView.upInset + 10))/10);
+        [self setNavigationBarAlpha:1-self.menuView.alpha];
     }else {
         [UIView animateWithDuration:0.3 animations:^{
             self.menuView.alpha = 0;
+            [self setNavigationBarAlpha:1];
         }];
     }
 
@@ -104,6 +106,10 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_slimeView scrollViewDidEndDraging];
+}
+
+- (void)setNavigationBarAlpha:(float)alpha {
+    self.navigationController.navigationBar.alpha = alpha;
 }
 
 #pragma mark - slimeRefresh delegate
